@@ -1,17 +1,18 @@
 // script.js
-$(document).ready(function () {
-    var settings = {
-        "url": "https://biggamesapi.io/api/clans?page=1&pageSize=100&sort=Points&sortOrder=desc",
-        "method": "GET",
-        "timeout": 0,
-    };
+function searchClan() {
+    var clanTag = $('#clanTagInput').val();
+    var apiUrl = 'https://biggamesapi.io/api/clans/' + encodeURIComponent(clanTag);
 
-    $.ajax(settings).done(function (response) {
+    $.getJSON(apiUrl, function (data) {
         // Process the data and create HTML elements
-        var $clanResults = $('#clan-search-results');
-        response.forEach(function (clan) {
-            var $clanItem = $('<div>').text(clan.name + ' - Points: ' + clan.points);
+        var $clanResults = $('#clanResults');
+        $clanResults.empty(); // Clear previous results
+
+        if (data.name) {
+            var $clanItem = $('<div>').text(data.name + ' - Points: ' + data.points);
             $clanResults.append($clanItem);
-        });
+        } else {
+            $clanResults.text('Clan not found. Please check the clan tag.');
+        }
     });
-});
+}

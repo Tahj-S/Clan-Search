@@ -9,10 +9,11 @@ function searchClan() {
         $clanResults.empty(); // Clear previous results
 
         if (data.name) {
-            var $clanItem = $('<div>').text(data.name + ' - Points: ' + data.points);
+            var $clanItem = $('<div>').html('<strong>' + data.name + '</strong> - Points: ' + data.points);
             $clanResults.append($clanItem);
         } else {
             $clanResults.text('Clan not found. Please check the clan tag.');
         }
     });
 }
+

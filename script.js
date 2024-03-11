@@ -4,7 +4,6 @@ function searchClan() {
     var apiUrl = 'https://biggamesapi.io/api/clans/' + encodeURIComponent(clanTag);
 
     $.getJSON(apiUrl, function (data) {
-        // Process the data and create HTML elements
         var $clanResults = $('#clanResults');
         $clanResults.empty(); // Clear previous results
 
